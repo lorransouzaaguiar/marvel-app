@@ -74,7 +74,9 @@ export default function Home (props: any) {
                  <Input 
                     placeholder="Pesquisar Herói" 
                     width='360px' 
+                    textAlign='center'
                     _placeholder={{textAlign: 'center'}}
+                    _focus={{borderColor: 'red'}}
                     height='48px'
                     marginBottom='24px'
                     backgroundColor='gray.30'
@@ -92,12 +94,10 @@ export default function Home (props: any) {
                     mt='300px'
                     padding='24px 34px' 
                     w='full'
-                  
                     sx={{
-                        '@media (min-width: 768px)': {
-                            gridTemplateColumns: 'repeat(4, 1fr)' 
+                        '@media (min-width: 1200px)': {
+                            gridTemplateColumns: 'repeat(5, 1fr)' 
                         }
-
                     }}
                     >
                     {
