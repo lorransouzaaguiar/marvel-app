@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import { Button, ButtonGroup, createIcon, IconButton, Image, List } from "@chakra-ui/react"
+import { Button, ButtonGroup, IconButton, List } from "@chakra-ui/react"
 import {Pagination as PaginationHelper} from './models/Pagination'
 import { LIMIT } from "../../modules/character/repository/CharacterRepository";
-import { ArrowLeft, ArrowRight, ButtonBack } from "./Icons";
+import { ArrowLeft, ArrowRight } from "./Icons";
 
 
 type PaginationProps = {
@@ -74,7 +74,6 @@ export const Pagination = ({total, offset, buttonsPerPage }: PaginationProps) =>
               width='20px'
               onClick={() => onPageChange(helper.incrementPage())}
               disabled={helper.currentPageNumber === helper.numberOfPages}
-
               borderRadius='100%'
               background='none'
             />
