@@ -25,8 +25,6 @@ const Hero = () => {
                 position='fixed'
                 minH='100px'
                 bg='gray.20'
-                
-                
             >
                 <IconButton 
                     ml='20px'
@@ -55,54 +53,72 @@ const Hero = () => {
             <VStack 
                 h='full' 
                 pb='30px' 
-                w='full'> 
-            <Box padding='0 20px' mb='100px' w='full' mt='200px'>
-                <Image 
-                    src={character?.urlImage} alt='' 
-                    w='full'
-                    maxHeight='600px'
-                    marginBottom='30px'
-                    borderRadius='10px'
-                    sx={{
-                        '@media (min-width: 768px)': {
-                            objectFit: 'cover'
-                        }
-                        
-                    }}
-                />
-                <SectionTitle text='Sobre o personagem'/>
-                <Text 
-                     fontWeight= '400'
-                     fontSize='16px'
-                     lineHeight='20px'
-                     mb='30px'
-                     color='gray.40'
-                >{character?.description}</Text>
-                <SectionTitle text='Quadrinhos'/>
-                <Box  overflowX="auto"  whiteSpace="nowrap" width='full' maxHeight='300px'>
-                    {
-                        !character?.hasComics() ?
-                        <Text 
-                            fontWeight= '400'
-                            fontSize='16px'
-                            lineHeight='20px'
-                            mb='30px'
-                            color='gray.40'>This caracter has no comics</Text>
-                            : 
-                            isLoading ? 'carregando...' 
-                             :  comics.map((comic, index) => 
-                             <VStack 
-                                 key={index} 
-                                 height='full'
-                                 maxWidth='200px' 
-                                 display='inline-block'
-                                 bgColor='gray.10' 
-                                 margin='0 10px' 
-                                 borderRadius='10px' 
-                                 padding='10px' >
-                                     <Image src={comic.urlImage} width='full' h='full' objectFit='cover'/>
-                             </VStack>)
+                w='full'
+                sx={{
+                    '@media (min-width: 768px)': {
+                        width: '768px',
+                        margin:'0 auto'
                     }
+                    
+                }}
+            > 
+                <Box padding='0 20px' mb='100px' w='full' mt='200px'>
+                    <Image 
+                        src={character?.urlImage} alt='' 
+                        w='full'
+                        maxHeight='600px'
+                        marginBottom='30px'
+                        borderRadius='10px'
+                        sx={{
+                            '@media (min-width: 768px)': {
+                                objectFit: 'cover'
+                            }
+                            
+                        }}
+                    />
+                    <SectionTitle text='Sobre o personagem'/>
+                    <Text 
+                        fontWeight= '400'
+                        fontSize='16px'
+                        lineHeight='20px'
+                        mb='30px'
+                        color='gray.40'
+                    >{character?.description}</Text>
+                    <SectionTitle text='Quadrinhos'/>
+                    <Box  
+                        overflowX="auto" 
+                        overflowY="hidden"  
+                        whiteSpace="nowrap" 
+                        width='full' 
+                        maxHeight='400px'>
+                        {
+                            !character?.hasComics() ?
+                            <Text 
+                                fontWeight= '400'
+                                fontSize='16px'
+                                lineHeight='20px'
+                                mb='30px'
+                                color='gray.40'>This caracter has no comics</Text>
+                                : 
+                                isLoading ? 'carregando...' 
+                                :  comics.map((comic, index) => 
+                                <VStack 
+                                    key={index} 
+                                    height='full'
+                                    maxWidth='200px' 
+                                    display='inline-block'
+                                    bgColor='gray.10' 
+                                    margin='0 10px' 
+                                    borderRadius='10px' 
+                                    padding='10px' 
+                                >
+                                    <Image 
+                                        src={comic.urlImage} 
+                                        width='full' 
+                                        h='full' 
+                                        objectFit='cover'/>
+                                </VStack>)
+                        }
                     </Box>
                 </Box>
             </VStack>
