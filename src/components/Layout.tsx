@@ -1,5 +1,4 @@
 //@ts-nocheck
-import { Box } from "@chakra-ui/react"
 import Head from "next/head"
 type LayoutProps = {
     children: React.ReactNode
@@ -17,13 +16,7 @@ export function Layout({children}: LayoutProps) {
             </Head>
             {
                     children
-                }
-           {/*  <Box h='100vh' display='flex' flexDirection='column'>
-                {
-                    children
-                }
-
-            </Box> */}
+            }
         </>
     )
 }

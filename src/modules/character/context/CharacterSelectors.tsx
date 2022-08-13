@@ -1,9 +1,6 @@
 import { Character } from "../models/Character"
 
 export const useSelectorGetCharacter = (characters: Character[], id: any) => {
-    /* if(!id) {
-        return null
-    } */
     const numberId = parseInt(id)
     return characters.find(character => character.id === numberId)
 }
