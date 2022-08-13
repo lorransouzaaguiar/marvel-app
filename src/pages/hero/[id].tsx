@@ -25,6 +25,7 @@ const Hero = () => {
                 position='fixed'
                 minH='100px'
                 bg='gray.20'
+                padding='0 20px'
             >
                 <IconButton 
                     aria-label="icon-button-back"
