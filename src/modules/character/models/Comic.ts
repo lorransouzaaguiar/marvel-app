@@ -1,14 +1,14 @@
 export class Comic {
     
-    //@ts-ignore
-    #marveLogo: string = process.env.marvelLogo
-
-    constructor (readonly name: string, readonly url: string, private _urlImage?: string) {
-       
-    }
+    constructor (readonly name: string, readonly url: string, private _urlImage?: string) {}
     
     static toDomain(data: any) { 
         return new Comic(data.name, data.resourceURI) 
+    }
+
+    static toDomainWithImage(comic: Comic, data: any) {
+        const imageUrl = data.thumbnail.path + '.' + data.thumbnail.extension
+        return new Comic(comic.name, comic.url, imageUrl)
     }
 
     public isValid() {

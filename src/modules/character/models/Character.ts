@@ -34,6 +34,10 @@ export class Character {
         return new Character(data.id, data.name, data.description, urlImage, comics)
     }
 
+    public hasComics = () => {
+        return this.comics.length
+    }
+
     
     private validateDescription() {
         if(this._description.length === 0) {
