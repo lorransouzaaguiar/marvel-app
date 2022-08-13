@@ -13,7 +13,7 @@ export function Layout({children}: LayoutProps) {
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
                 <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet"/>
-                <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
             </Head>
             {
                     children
