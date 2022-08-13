@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router";
 import { CharacterCard } from "../modules/character/components/CharacterCard";
-import { useFetchCharacters } from "../modules/character/context/CharacterActions";
+import { useFetchCharacters } from "../modules/character/context/Actions";
 import { Pagination } from "../components/Pagination";
 import { Parser } from "../utils/Parser";
 import { Layout } from "../components/Layout";
@@ -24,6 +24,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { dehydratedState: dehydrate(queryClient) }};
 }
 
+const renderList = (data?: Character[]) => {
+    return  data?.map(character => 
+         <Link key={character.id} href={`/hero/${character.id}`} style={{background: 'red'}}>
+            <a><CharacterCard  character={character}/></a>
+        </Link> 
+    )
+}
+
 export default function Home (props: any) {
     const router = useRouter();
     const {characters} = useCharacter()
@@ -31,14 +39,6 @@ export default function Home (props: any) {
     const {data, isLoading} = useFetchCharacters(offset)
     const [name, setName] = useState('')
     const searchedCharacters = useSelectorGetCharacterByName(characters, name)
-
-    const renderList = (data?: Character[]) => {
-        return  data?.map(character => 
-             <Link key={character.id} href={`/hero/${character.id}`} style={{background: 'red'}}>
-                <a><CharacterCard  character={character}/></a>
-            </Link> 
-        )
-    }
 
     return (
         <Layout>
@@ -50,8 +50,10 @@ export default function Home (props: any) {
                 flexDirection='column'
                 alignItems='center'
                 width='full'    
-             
-                padding='24px 34px' 
+                top='90px'
+                bg='gray.20'
+                position='fixed'
+                padding='24px 34px 0 34px' 
                 
             >
                 <Heading 
@@ -80,14 +82,17 @@ export default function Home (props: any) {
                     onChange={(e) => {
                         setName(e.target.value)
                     }}
-
                 />
+            </Box>
                 <Grid 
                     as='article' 
                     templateColumns='repeat(2, 1fr)' 
                     h='full'
                     gap='30px' 
+                    mt='300px'
+                    padding='24px 34px' 
                     w='full'
+                  
                     sx={{
                         '@media (min-width: 768px)': {
                             gridTemplateColumns: 'repeat(4, 1fr)' 
@@ -100,7 +105,6 @@ export default function Home (props: any) {
                         isLoading && !searchedCharacters.length  ? 'carregando...' : renderList(data?.results)
                     }
                 </Grid>
-            </Box>
             
         </Layout> 
     )
