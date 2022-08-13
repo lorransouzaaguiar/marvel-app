@@ -27,7 +27,7 @@ export const CharacterCard = ({character}: CharacterCardPropType) => {
             <Image 
                 src={character.urlImage} 
                 width='full' 
-                height='150px'
+                minHeight='150px'
                 alt=''
                 objectFit='cover'
                 borderRadius='9px 9px 0px 0px'

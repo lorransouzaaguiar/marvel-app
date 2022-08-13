@@ -29,7 +29,7 @@ const Hero = () => {
     return (
         <Layout>
             <Header />
-            <VStack h='full' pb='30px'>
+            <VStack h='full' pb='30px' w='full'>
 
             <Flex
                 width='full'
@@ -61,7 +61,7 @@ const Hero = () => {
                         lineHeight='32px'>{character?.name}</Heading>
                 </Center>
             </Flex>
-            <Box padding='0 20px' mb='100px'>
+            <Box padding='0 20px' mb='100px' w='full'>
                 <Image 
                     src={character?.urlImage} alt='' 
                     w='full'
@@ -78,26 +78,23 @@ const Hero = () => {
                      color='gray.40'
                 >{character?.description}</Text>
                 <SectionTitle text='Quadrinhos'/>
-                
-                    <Box  overflowX="auto"  whiteSpace="nowrap" width='full' maxHeight='300px'>
-                        {
-                            comics.length ?
-                            comics.map((comic, index) =>  {
-                                return (
-                                    <VStack 
-                                        key={index} 
-                                        height='full'
-                                        maxWidth='200px' 
-                                        display='inline-block'
-                                        bgColor='gray.10' 
-                                        margin='0 10px' 
-                                        borderRadius='10px' 
-                                        padding='10px' >
-                                            <Image src={comic.urlImage} width='full' h='full' objectFit='cover'/>
-                                    </VStack>)
-                            } ) : 'carregando...'  
-                        }
-                    </Box>
+                <Box  overflowX="auto"  whiteSpace="nowrap" width='full' maxHeight='300px'>
+                    {
+                        comics.length ?
+                        comics.map((comic, index) => 
+                            <VStack 
+                                key={index} 
+                                height='full'
+                                maxWidth='200px' 
+                                display='inline-block'
+                                bgColor='gray.10' 
+                                margin='0 10px' 
+                                borderRadius='10px' 
+                                padding='10px' >
+                                    <Image src={comic.urlImage} width='full' h='full' objectFit='cover'/>
+                            </VStack>) : 'carregando...'  
+                    }
+                </Box>
                 </Box>
             </VStack>
           
