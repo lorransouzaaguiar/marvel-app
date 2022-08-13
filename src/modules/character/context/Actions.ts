@@ -6,16 +6,13 @@ import { CharacterRepository } from "../repository/CharacterRepository"
 import { ComicRepository } from "../repository/ComicRepository"
 import { useCharacter } from "./CharacterContext"
 
-export type ApiInfo = {
-    offset: number,
-    limit: number,
+
+export type ApiCharactersResponse = {
     total: number,
-    count: number,
     results: Character[]
 }
 
-
-export function useFetchCharacters(offset: number): UseQueryResult<ApiInfo, unknown> {
+export function useFetchCharacters(offset: number): UseQueryResult<ApiCharactersResponse, unknown> {
     const repo = new CharacterRepository()
     const { setCharacters} = useCharacter()
     
@@ -24,7 +21,7 @@ export function useFetchCharacters(offset: number): UseQueryResult<ApiInfo, unkn
         return {...requestData.data, results: characters}
     }
     
-    const response =  useQuery<ApiInfo>(["characters", offset], async () => await repo.getByOffset(offset), {
+    const response =  useQuery<ApiCharactersResponse>(["characters", offset], async () => await repo.getByOffset(offset), {
         select: transformData,
         keepPreviousData: true,
         refetchOnMount: false,
@@ -60,7 +57,7 @@ export const useGetComicsWithImages = (character?: Character) => {
             })
         }
         
-    }, [character?.comics, setComics ])
+    }, [ setComics ])
 
     return {comics, setComics, isLoading, hasError}
 }

@@ -14,7 +14,9 @@ export class ComicRepository {
                 const data = resp.data.data.results[0]
                 const imageUrl = data.thumbnail.path + '.' + data.thumbnail.extension
                 const newComic = new Comic(comic.name, comic.url, imageUrl)
-                if(newComic.isValid()) newComics.push(newComic)
+                if(newComic.isValid()) {
+                    newComics.push(newComic)
+                }
             }
             return newComics
         }catch(e) {
