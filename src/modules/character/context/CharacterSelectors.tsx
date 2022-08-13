@@ -6,5 +6,7 @@ export const useSelectorGetCharacter = (characters: Character[], id: any) => {
 }
 export const useSelectorGetCharacterByName = (characters: Character[], name: string) => {
     if(!name.length) return []
-    return characters.filter(character => character.name.toLocaleLowerCase().startsWith(name.toLocaleLowerCase()))
+    return characters.filter(character => 
+        character.name.toLocaleLowerCase()
+        .startsWith(name.toLocaleLowerCase()))
 }
