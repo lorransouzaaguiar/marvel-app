@@ -12,8 +12,8 @@ export class CharacterRepository {
         return respo.data
     }
     
-    getByNameStartWith = async (name: string) => {
-        const url = `${UrlHelper.urlBase}${this.#route}nameStartsWith=${name}&?limit=${LIMIT}&${UrlHelper.authApi}`
+    getByNameStartWith = async (offset: number, name: string) => {
+        const url = `${UrlHelper.urlBase}${this.#route}?nameStartsWith=${name}&limit=${LIMIT}&offset=${offset}&${UrlHelper.authApi}`
         const respo = await axios.get(url)
         return respo.data
     }
