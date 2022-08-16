@@ -4,14 +4,15 @@ import { Header } from "../../components/Header"
 import { Layout } from "../../components/Layout"
 import { ButtonBack } from "../../components/Pagination/Icons"
 import { SectionTitle } from "../../components/SectionTitle"
-import { useGetComicsWithImages } from "../../modules/character/context/Actions"
+import { useGetComicsWithImages } from "../../modules/character/context/CharacterController"
 import { useCharacter } from "../../modules/character/context/CharacterContext"
 import { useSelectorGetCharacter } from "../../modules/character/context/CharacterSelectors"
 
 const Hero = () => {
     const router = useRouter()
-    const {characters} = useCharacter()
-    const character = useSelectorGetCharacter(characters, router.query.id)
+    const {searchedCharacters, characters} = useCharacter()
+    const character = useSelectorGetCharacter(
+            searchedCharacters.length ? searchedCharacters : characters, router.query.id)
     const {isLoading, comics} = useGetComicsWithImages(character)
 
     return (
@@ -116,7 +117,9 @@ const Hero = () => {
                                         src={comic.urlImage} 
                                         width='full' 
                                         h='full' 
-                                        objectFit='cover'/>
+                                        objectFit='cover'
+                                        alt=""
+                                    />
                                 </VStack>)
                         }
                     </Box>
