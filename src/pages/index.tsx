@@ -1,4 +1,4 @@
-import { Grid, Heading, Input, Box } from "@chakra-ui/react"
+import { Grid, Heading, Input, Box, Spinner, Center } from "@chakra-ui/react"
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router";
@@ -12,7 +12,6 @@ import { Header } from "../components/Header";
 import { Character } from "../modules/character/models/Character";
 import { useCharacter } from "../modules/character/context/CharacterContext";
 import { CharacterRepository } from "../modules/character/repository/CharacterRepository";
-import { useEffect } from "react";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const queryClient = new QueryClient();
@@ -35,8 +34,8 @@ export default function Home (props: any) {
     const router = useRouter();
     const {offset} = Parser.pagination(router.query.offset)
     const {setSearchedName, searchedName} = useCharacter()
-    const {isLoading, data} = useFetchCharacters(offset , searchedName)
-
+    const {isLoading, data} = useFetchCharacters( offset , searchedName)
+   
     return (
         <Layout>
             <Header />
@@ -64,13 +63,13 @@ export default function Home (props: any) {
                 
                 <Pagination 
                     //@ts-ignore
-                    total={data?.total}
+                    total={ data?.total}
                     offset={offset}
                     buttonsPerPage={5}
                 />
                  <Input 
                     placeholder="Pesquisar Herói" 
-                    width='360px' 
+                    maxWidth='360px' 
                     textAlign='center'
                     _placeholder={{textAlign: 'center'}}
                     _focus={{borderColor: 'red'}}
@@ -83,8 +82,14 @@ export default function Home (props: any) {
                     }}
                 />
             </Box>
+            {
+                isLoading ? 
+                    <Center mt='300px'>
+                            <Spinner />
+                    </Center>
+                : 
                 <Grid 
-                    as='article' 
+                as='article' 
                     templateColumns='repeat(2, 1fr)' 
                     h='full'
                     gap='30px' 
@@ -97,10 +102,9 @@ export default function Home (props: any) {
                         }
                     }}
                     >
-                    {
-                        isLoading  ? 'carregando...' : renderList(data?.results)
-                    }
+                    {renderList(data?.results)}
                 </Grid>
+            }
             
         </Layout> 
     )
